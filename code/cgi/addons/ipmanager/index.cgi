@@ -43,16 +43,16 @@ my $vars = {
     shared_ips              => undef,
     custom_ip               => undef,
     security_token          => $ENV{cp_security_token},
-    favicon_mrlink          => Cpanel::MagicRevision::calculate_magic_url('../../../favicon.ico'),
-    ie7_css_mrlink          => Cpanel::MagicRevision::calculate_magic_url('../../../themes/x/css/ie7.css'),
-    ie6_css_mrlink          => Cpanel::MagicRevision::calculate_magic_url('../../../themes/x/css/ie6.css'),
-    combopt_css_mrlink      => Cpanel::MagicRevision::calculate_magic_url('../../../combined_optimized.css'),
-    styleopt_css_mrlink     => Cpanel::MagicRevision::calculate_magic_url('../../../themes/x/style_optimized.css'),
+    favicon_mrlink          => Cpanel::MagicRevision::calculate_magic_url('../../../../favicon.ico'),
+    ie7_css_mrlink          => Cpanel::MagicRevision::calculate_magic_url('../../../../themes/x/css/ie7.css'),
+    ie6_css_mrlink          => Cpanel::MagicRevision::calculate_magic_url('../../../../themes/x/css/ie6.css'),
+    combopt_css_mrlink      => Cpanel::MagicRevision::calculate_magic_url('../../../../combined_optimized.css'),
+    styleopt_css_mrlink     => Cpanel::MagicRevision::calculate_magic_url('../../../../themes/x/style_optimized.css'),
     utilcontainer_js_mrlink => Cpanel::MagicRevision::calculate_magic_url('../../../../yui-gen/utilities_container/utilities_container.js'),
     cpallmin_js_mrlink      => Cpanel::MagicRevision::calculate_magic_url('../../../../cjt/cpanel-all-min-en.js'),
-    chngsiteip_jpeg_mrlink  => Cpanel::MagicRevision::calculate_magic_url('../../../themes/x/icons/change_site_ipaddress.gif'),
+    chngsiteip_jpeg_mrlink  => Cpanel::MagicRevision::calculate_magic_url('../../../../themes/x/icons/change_site_ipaddress.gif'),
     autocomplete_css_mrlink => Cpanel::MagicRevision::calculate_magic_url('../../../../yui/assets/skins/sam/autocomplete.css'),
-    pkghover_js_mrlink      => Cpanel::MagicRevision::calculate_magic_url('../../../js/pkg_hover.js'),
+    pkghover_js_mrlink      => Cpanel::MagicRevision::calculate_magic_url('../../../../js/pkg_hover.js'),
     datasource_js_mrlink    => Cpanel::MagicRevision::calculate_magic_url('../../../../yui/datasource/datasource.js'),
     autocomplete_js_mrlink  => Cpanel::MagicRevision::calculate_magic_url('../../../../yui/autocomplete/autocomplete.js'),
 };
@@ -179,7 +179,7 @@ sub get_reseller_by_domain {
 sub get_reseller_ip_list {
     my ( $reseller, $ip_aliases ) = @_;
 
-    my $dips_file = '/var/cpanel/dips/' . $reseller;
+    my $dips_file = '/var/cpanel/mainips/' . $reseller;
     my @reseller_ips;
     my %ip_list;
 
@@ -376,7 +376,7 @@ sub change_site_ip {
     run_forked('/scripts/updateuserdomains --force');
 
     #Rebuild httpd.conf
-    run_forked('/scripts/rebuildhttpdconf --force');
+    run_forked('/scripts/rebuildhttpdconf');
 
     #Restart Apache
     run_forked('/usr/local/apache/bin/apachectl restart');
